@@ -1,15 +1,22 @@
  * {
-     font-family: Arial, Helvetica, sans-serif
+     font-family: Arial, Helvetica, sans-serif;
+
+     
  }
 
  #blogpost-titles {
     float: left;
- }
+}
 
- #blogpost-titles-list {
-     list-style-type: none;
- }
- #main-panel {
-     float: right;
-     width: 67%
+#blogpost-titles-list {
+    list-style-type: none;
+}
+#main-panel {
+    float: right;
+    width: 67%;
+}
+
+#container {
+    background-color: lightblue
+
  }
