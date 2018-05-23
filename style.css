@@ -1,0 +1,15 @@
+ * {
+     font-family: Arial, Helvetica, sans-serif
+ }
+
+ #blogpost-titles {
+    float: left;
+ }
+
+ #blogpost-titles-list {
+     list-style-type: none;
+ }
+ #main-panel {
+     float: right;
+     width: 67%
+ }
