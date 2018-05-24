@@ -8,15 +8,17 @@ window.addEventListener('load', () => {
         event.preventDefault();
         const title = document.querySelector('#input-title').value
         const content = document.querySelector('#textarea-content').value
-        console.log({title, content})
-        axios.post(baseURL , {title , content})
-        .then( response =>{
-            loadTitle();
-            showBlogpost (response.data);
+        // console.log({title, content})
+        axios.post(baseURL, {
+                title,
+                content
+            })
+            .then(response => {
+                loadTitle();
+                showBlogpost(response.data);
 
-        })
-        .catch( error  =>console.error(error)
-        );
+            })
+            .catch(error => console.error(error));
     }
 
     const newBlogpost = () => {
@@ -31,9 +33,39 @@ window.addEventListener('load', () => {
         document.querySelector('#create-button').addEventListener('click', createBlogpost)
     }
 
+    const editBlogpost = blogpost => {}
+
+
+    const deleteBlogpost = blogpost => {
+
+        console.log(blogpost)
+        axios.delete(`${baseURL}/${blogpost_id}`)
+            .then(result => {
+               mainPanelEl.innerHTML = ""
+            })
+            .catch(error => console.error(error));
+
+    }
+
+
+    const updeteBlogpost = blogpost => {
+         const id = document.querySelector('#input-title').value
+         const id2 = document.querySelector('#textarea-content').value
+         axios.put(`${baseURL}/notes/${id}`, {
+                 id,
+                 id2
+             })
+             .then(result => {
+                 container.innerHTML = `
+        <code>${JSON.stringify(result.data)}</code>
+      `
+             })
+    }
+
+
 
     const showBlogpost = blogpost => {
-        console.log(blogpost.title)
+        // console.log(blogpost.title)
         mainPanelEl.innerHTML = ""
         const focusTitleEl = document.createElement('h3')
         const focusContentEl = document.createElement('p')
