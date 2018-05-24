@@ -33,15 +33,29 @@ window.addEventListener('load', () => {
         document.querySelector('#create-button').addEventListener('click', createBlogpost)
     }
 
-    const editBlogpost = blogpost => {}
+    const editBlogpost = blogpost => {
+        mainPanelEl.innerHTML = `<form>
+        <label for="title">Title</label>
+         <input type = "text" name="title" id="input-title-edit" ><br><br>
+         <label for = "content" > Content </label>
+          <textarea name = "content" id = "textarea-content-edit"></textarea>
+          <button  id="update-button">Create </button>
+        </form>`;
+
+        document.querySelector('#input-title-edit').value = blogpost.title
+        document.querySelector('#input-content-edit').value = blogpost.content
+        document.querySelector('#pdate-button').addEventListener('click', () => {
+            updeteBlogpost(blogpost)
+        })
+    }
 
 
     const deleteBlogpost = blogpost => {
-
         console.log(blogpost)
-        axios.delete(`${baseURL}/${blogpost_id}`)
-            .then(result => {
-               mainPanelEl.innerHTML = ""
+        axios.delete(`${baseURL}/${blogpost.id}`)
+            .then(response => {
+                loadTitle()
+                mainPanelEl.innerHTML = ""
             })
             .catch(error => console.error(error));
 
@@ -49,17 +63,14 @@ window.addEventListener('load', () => {
 
 
     const updeteBlogpost = blogpost => {
-         const id = document.querySelector('#input-title').value
-         const id2 = document.querySelector('#textarea-content').value
-         axios.put(`${baseURL}/notes/${id}`, {
-                 id,
-                 id2
-             })
-             .then(result => {
-                 container.innerHTML = `
+        const id = document.querySelector('#input-title').value
+        const id2 = document.querySelector('#textarea-content').value
+        axios.put(`${baseURL}/${blogpost.id}`)
+            .then(result => {
+                container.innerHTML = `
         <code>${JSON.stringify(result.data)}</code>
       `
-             })
+            })
     }
 
 
